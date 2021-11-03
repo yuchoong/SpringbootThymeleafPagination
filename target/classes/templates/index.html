@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        th {
+            text-align: center;
+            font-weight: bold;
+            border-top: none !important;
+        }
+
+        th, td {
+            white-space: nowrap;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .table-alignment {
+            margin-left: -200px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3 class="text-info text-center mt-20">Pagination Example : Residents</h3>
+
+    <table class="table table-striped table-alignment mt-20 text-center">
+        <thead id="residentsTable">
+        <tr>
+            <th>Id</th>
+            <th>Full name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Email Address</th>
+            <th>Date of Birth</th>
+            <th>Home Address</th>
+            <th>Nationality</th>
+            <th>First Language</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resident : ${responseEntity.residents}">
+            <td th:text="${resident.id}"></td>
+            <td th:text="${resident.fullName}"></td>
+            <td th:text="${resident.age}"></td>
+            <td th:text="${resident.gender}"></td>
+            <td th:text="${resident.phoneNumber}"></td>
+            <td th:text="${resident.emailAddress}"></td>
+            <td th:text="${resident.dateOfBirth}"></td>
+            <td th:text="${resident.homeAddress}"></td>
+            <td th:text="${resident.nationality}"></td>
+            <td th:text="${resident.firstLanguage}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination control -->
+    <!-- Hardcoding the default page-size as 10. User can create a dropdown to select the different page-sizes. -->
+    <div class="row">
+        <div th:if="${responseEntity.page['totalPages'] > 1}">
+            <div>
+                Total Items: [[${responseEntity.page['totalPages']}]]
+            </div>
+            <div>
+                <span th:each="i: ${#numbers.sequence(1, responseEntity.page['totalPages'])}">
+                    <a th:href="@{'/residents/paginated/' + ${i} + '/10'}"
+                       th:if="${responseEntity.page['currentPage'] != i}">[[${i}]]</a>
+                    <span th:unless="${responseEntity.page['currentPage'] != i}">[[${i}]]</span>
+                </span>
+            </div>
+            <div>
+                <a th:href="@{'/residents/paginated/' + ${responseEntity.page['currentPage'] + 1} + '/10'}"
+                   th:if="${responseEntity.page['currentPage'] < responseEntity.page['totalPages']}">
+                    Next
+                </a>
+                <span th:unless="${responseEntity.page['currentPage'] < responseEntity.page['totalPages']}">Next</span>
+            </div>
+            <div>
+                <a th:href="@{'/residents/paginated/' + ${responseEntity.page['totalPages']} + '/10'}"
+                   th:if="${responseEntity.page['currentPage'] < responseEntity.page['totalPages']}">
+                    Last
+                </a>
+                <span th:unless="${responseEntity.page['currentPage'] < responseEntity.page['totalPages']}">Last</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<form action="#"
+      th:action="@{/update/{id}(id=${resident.id})}"
+      th:object="${resident}"
+      method="post">
+
+  <table class="table table-striped table-alignment mt-20">
+    <thead id="residentsTable">
+    <tr>
+      <th>ID</th>
+      <td>
+        [[${resident.id}]]
+      </td>
+    </tr>
+    <tr>
+      <th><label for="fullName">Name</label></th>
+      <td>
+        <input type="text" th:field="*{fullName}" id="fullName" placeholder="FullName">
+        <span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>
+        <input type="text" th:field="*{age}" id="age" placeholder="Age">
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <td>
+        <input type="text" th:field="*{gender}" id="gender" placeholder="Gender">
+        <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th>Phone Number</th>
+      <td>
+        <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="PhoneNumber">
+        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="emailAddress">Email Address</label></th>
+      <td> <input type="text" th:field="*{emailAddress}" id="emailAddress" placeholder="EmailAddress">
+        <span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span></td>
+    </tr>
+    <tr>
+      <th>Date of Birth</th>
+      <td>
+        <input type="text" th:field="*{dateOfBirth}" id="dateOfBirth" placeholder="DateOfBirth">
+        <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th>Home Address</th>
+      <td>
+        <input type="text" th:field="*{homeAddress}" id="homeAddress" placeholder="HomeAddress">
+        <span th:if="${#fields.hasErrors('homeAddress')}" th:errors="*{homeAddress}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th>Nationality</th>
+      <td>
+        <input type="text" th:field="*{nationality}" id="nationality" placeholder="Nationality">
+        <span th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></span>
+      </td>
+    </tr>
+    <tr>
+      <th>First Language</th>
+      <td>
+        <input type="text" th:field="*{firstLanguage}" id="firstLanguage" placeholder="FirstLanguage">
+        <span th:if="${#fields.hasErrors('firstLanguage')}" th:errors="*{firstLanguage}"></span>
+      </td>
+    </tr>
+    </tr>
+    </thead>
+  </table>
+  <input type="submit" name="action" value="Update">
+  <input type="submit" name="action" value="Delete">
+</form>
+</html>
