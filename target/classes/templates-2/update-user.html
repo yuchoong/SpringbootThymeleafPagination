@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
 <form action="#"
       th:action="@{/update/{id}(id=${resident.id})}"
       th:object="${resident}"
@@ -8,67 +9,67 @@
   <table class="table table-striped table-alignment mt-20">
     <thead id="residentsTable">
     <tr>
-      <th>ID</th>
+      <th th:text="#{msg.id}" />
       <td>
         [[${resident.id}]]
       </td>
     </tr>
     <tr>
-      <th><label for="fullName">Name</label></th>
+      <th th:text="#{msg.name}" />
       <td>
         <input type="text" th:field="*{fullName}" id="fullName" placeholder="FullName">
         <span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
       </td>
     </tr>
     <tr>
-      <th>Age</th>
+      <th th:text="#{msg.age}" />
       <td>
         <input type="text" th:field="*{age}" id="age" placeholder="Age">
         <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
       </td>
     </tr>
     <tr>
-      <th>Gender</th>
+      <th th:text="#{msg.gender}" />
       <td>
         <input type="text" th:field="*{gender}" id="gender" placeholder="Gender">
         <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
       </td>
     </tr>
     <tr>
-      <th>Phone Number</th>
+      <th th:text="#{msg.phoneNumber}" />
       <td>
         <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="PhoneNumber">
         <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
       </td>
     </tr>
     <tr>
-      <th><label for="emailAddress">Email Address</label></th>
+      <th th:text="#{msg.emailAddress}" />
       <td> <input type="text" th:field="*{emailAddress}" id="emailAddress" placeholder="EmailAddress">
         <span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span></td>
     </tr>
     <tr>
-      <th>Date of Birth</th>
+      <th th:text="#{msg.dateOfBirth}" />
       <td>
         <input type="text" th:field="*{dateOfBirth}" id="dateOfBirth" placeholder="DateOfBirth">
         <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
       </td>
     </tr>
     <tr>
-      <th>Home Address</th>
+      <th th:text="#{msg.homeAddress}" />
       <td>
         <input type="text" th:field="*{homeAddress}" id="homeAddress" placeholder="HomeAddress">
         <span th:if="${#fields.hasErrors('homeAddress')}" th:errors="*{homeAddress}"></span>
       </td>
     </tr>
     <tr>
-      <th>Nationality</th>
+      <th th:text="#{msg.nationality}" />
       <td>
         <input type="text" th:field="*{nationality}" id="nationality" placeholder="Nationality">
         <span th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></span>
       </td>
     </tr>
     <tr>
-      <th>First Language</th>
+      <th th:text="#{msg.firstLanguage}" />
       <td>
         <input type="text" th:field="*{firstLanguage}" id="firstLanguage" placeholder="FirstLanguage">
         <span th:if="${#fields.hasErrors('firstLanguage')}" th:errors="*{firstLanguage}"></span>
