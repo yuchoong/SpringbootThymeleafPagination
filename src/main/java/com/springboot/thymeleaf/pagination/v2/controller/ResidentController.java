@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // Causes Lombok to generate a logger field.
@@ -20,6 +21,7 @@ import java.util.Map;
 @Controller
 public class ResidentController {
 
+    private static final int DEFAULT_PAGE_ID = 1;
     private static final int DEFAULT_PAGE_NUMBER = 1;
     private static final int DEFAULT_PAGE_SIZE = 10;
 
@@ -38,7 +40,20 @@ public class ResidentController {
                                         @PathVariable(name = "page-size") final int pageSize, final Model model) {
         log.info("Getting the residents in a paginated way for page-number = {} and page-size = {}.", pageNumber, pageSize);
         final Page<Resident> paginatedResidents = service.getPaginatedResidents(pageNumber, pageSize);
+        final List<Resident> listedResidents =  paginatedResidents.getContent();
+        int currentCounter = 0;
+        for (Resident resident : listedResidents) {
+            if (currentCounter == 0 && pageNumber == 1){
+                currentCounter = 1;
+            }else if (currentCounter == 0 && pageNumber > 1){
+                currentCounter = ((pageNumber - 1) * pageSize) + 1;
+            }else{
+                currentCounter++;
+            }
+            resident.setCounter(currentCounter);
+        }
         model.addAttribute("responseEntity", createResponseDto(paginatedResidents, pageNumber));
+        model.addAttribute("listedResidents", listedResidents);
         return "index";
     }
 
